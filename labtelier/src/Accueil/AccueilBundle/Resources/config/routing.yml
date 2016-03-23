@@ -1,0 +1,7 @@
+accueil_homepage:
+    path:     /
+    defaults: { _controller: AccueilBundle:Default:index }
+    
+membre_homepage:
+    path:     /membre
+    defaults: { _controller: AccueilBundle:Membre:membre }

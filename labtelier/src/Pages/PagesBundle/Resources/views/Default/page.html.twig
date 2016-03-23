@@ -1,0 +1,33 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div id="entete" class="span12">
+				<h2>Article complet <i class="icon-file"></i></h2>
+				<div id="champ" class="span3">
+					{% include 'AccueilBundle:Modules:menu.html.twig' %}
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						{% include 'UtilisateursBundle:Modules:utilisateurConnecte.html.twig' %}
+					{% else %}
+						{% include 'UtilisateursBundle:Modules:utilisateurDeconnecte.html.twig' %}
+					{% endif %}
+					{% if is_granted('ROLE_ADMIN') %}
+						{% include 'AccueilBundle:Modules:formulaires.html.twig' %}
+					{% endif %}
+				</div>
+				<div class="liens span8 bords">
+					<div class="wrapper">
+						<div class="parent">
+							<a href="{{ path('pages_homepage') }}" class="bouton children">Retour Liste</a><br/>
+						</div>
+					</div>
+					<br/>
+					<h1>{{ page.titre|raw }}</h1>
+					<div class="paddingRight">
+						{{ page.contenu|raw }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

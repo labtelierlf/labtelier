@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link rel="stylesheet" href="../css/bootstrap.css"/>
+	<link rel="stylesheet" href="../css/bootstrap-responsive.css"/>
+	<link rel="stylesheet" href="../css/style.css"/>
+	<link rel="stylesheet" href="font-awesome.css"/>
+	<title>Connexion</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <h2>Connexion <i class="icon-unlock-alt"></i></h2>
+			<div class="liens span4 bords">
+				<h4>Pas encore inscrit ?</h4>
+				<em>
+					nous vous invitons à vous inscrire<br />
+					afin de profiter de toutes les fonctionnalités du site.
+				</em>
+				<br /><br />
+				<div class="wrapper">
+					<div class="parent">
+						<a href="inscription.php" class="bouton children">S'inscrire</a>
+					</div>
+				</div>
+			</div>
+			<div class="liens span4 offset2 bords">
+				<h4>Connexion</h4>
+				<form action="mon-compte.php">
+					<label>Nom d'utilisateur</label>
+					<input type="text" name="nom" id="nom"/>
+					<label>Mot de passe</label>
+					<input type="password" name="motPasse" id="motPasse"/>
+					<br/>
+					<div class="wrapper">
+						<div class="parent">
+							<button class="bouton children">Connexion</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="liens span4 bords">
+				<div class="wrapper">
+					<div class="parent">
+						<a href="mot-de-passe-perdu.php" class="bouton children">Mot de passe perdu ?</a>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-1.10.0.min.js"></script>
+<script src="../js/bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"/>
+		<link rel="stylesheet" href="{{ asset('css/bootstrap-responsive.css') }}"/>
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+		<link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}"/>
+        <title>{% block title %}Bienvenue{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+    	<div id="header" class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="brand" href="{{ path('accueil_homepage') }}">L'Atelier 16<br/>production</a>
+					<div class="nav-collapse collapse">
+						<form id="formRecherche" class="navbar-form form-search pull-right" action="{{ path('recherche_pages') }}" method="post">
+							<div class="entretoise"></div><!--
+							-->{% render(controller('PagesBundle:Default:recherche')) %}<!--
+							--><button id="boutonRecherche"><i class="icon-search"></i></button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+        {% block body %}{% endblock %}
+		<script src="{{ asset('js/jquery-1.10.0.min.js') }}"></script>
+		<script src="{{ asset('js/bootstrap.js') }}"></script>
+		{% block javascripts %}{% endblock %}
+	</body>
+</html>

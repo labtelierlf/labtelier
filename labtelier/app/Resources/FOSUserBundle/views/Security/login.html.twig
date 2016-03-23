@@ -1,0 +1,63 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+{% if error %}
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<!--<?php include '../layout/col-left-co.php'; ?>-->
+				<h2>Erreur <i class="icon-thumbs-down"></i></h2>
+				<div class="liens span4 bords">
+					<br/>
+    				<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    			</div>
+			</div>
+		</div>
+	</div>
+{% endif %}
+<div id="entete" class="container">
+    <div class="row">
+        <div class="span12">
+            <h2>Connexion <i class="icon-unlock-alt"></i></h2>
+			<div class="liens span4 bords">
+				<h4>Pas encore inscrit ?</h4>
+				<em>
+					nous vous invitons à vous inscrire<br />
+					afin de profiter de toutes les fonctionnalités du site.
+				</em>
+				<br /><br />
+				<div class="wrapper">
+					<div class="parent">
+						<a href="{{ path('fos_user_registration_register') }}" class="bouton children">S'inscrire</a>
+					</div>
+				</div>
+			</div>
+			<div id="bloc" class="liens span4 offset2 bords">
+				<h4>Connexion</h4>
+				<form action="{{ path('fos_user_security_check') }}" method="post">
+					<label>Nom d'utilisateur</label>
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+					<input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+					<label>Mot de passe</label>
+					<input type="password" id="password" name="_password" required="required" />
+					<br/>
+					<div class="wrapper">
+						<div class="parent">
+							<input type="submit" class="bouton children" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="liens span4 bords">
+				<div class="wrapper">
+					<div class="parent">
+						<a href="{{ path('fos_user_resetting_request') }}" class="bouton children">Mot de passe perdu ?</a>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>
+{% endblock fos_user_content %}

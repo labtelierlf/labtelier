@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link rel="stylesheet" href="../css/bootstrap.css"/>
+	<link rel="stylesheet" href="../css/bootstrap-responsive.css"/>
+	<link rel="stylesheet" href="../css/style.css"/>
+	<link rel="stylesheet" href="font-awesome.css"/>
+	<title>Nouveau mot de passe</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <h2>Nouveau mot de passe <i class="icon-key"></i></h2>
+			<div class="span4 bords">
+				<h4>Récupération du mot de passe ?</h4>
+				<em>
+					Compléter le formulaire, votre mot de passe sera alors réinitialiser.<br /><br />
+					Une fois validé, vous devrez utiliser le nouveau mot de passe que vous avez défini.
+				</em>
+			</div>
+			<div class="liens span4 offset2 bords">
+				<h4>Indiquer votre nouveau mot de passe</h4>
+				<form action="nouveau-mot-de-passe.php">
+					<label>Mot de passe</label>
+					<input type="password" name="motPasse" id="motPasse" class="correction"/>
+					<label>Confirmer</label>
+					<input type="password" name="confirmation" id="confirmation" class="correction"/>
+					<br/>
+					<div class="wrapper">
+						<div class="parent">
+							<button class="bouton children">Envoyer</button>
+						</div>   
+        			</div>
+				</form>
+			</div>   
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-1.10.0.min.js"></script>
+<script src="../js/bootstrap.js"></script>
+</body>
+</html>

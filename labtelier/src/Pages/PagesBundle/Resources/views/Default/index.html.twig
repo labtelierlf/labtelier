@@ -1,0 +1,55 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div id="entete" class="span12">
+				<h2>Liste des articles <i class="icon-list"></i></h2>
+				<div id="champ" class="span3">
+					{% include 'AccueilBundle:Modules:menu.html.twig' %}
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						{% include 'UtilisateursBundle:Modules:utilisateurConnecte.html.twig' %}
+					{% else %}
+						{% include 'UtilisateursBundle:Modules:utilisateurDeconnecte.html.twig' %}
+					{% endif %}
+					{% if is_granted('ROLE_ADMIN') %}
+						{% include 'AccueilBundle:Modules:formulaires.html.twig' %}
+					{% endif %}
+				</div>
+				<div class="liens span8 paddingRight paddingBottom bords">
+					{% for flashMessage in app.session.flashbag.get('warning') %}
+						<div class="alert alert-warning">{{ flashMessage }}</div>
+					{% endfor %}
+					{% for flashMessage in app.session.flashbag.get('success') %}
+						<div class="alert alert-success">{{ flashMessage }}</div>
+					{% endfor %}
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Titre</th>
+								<th>Aperçu</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for page in pages %}
+								<tr>
+									<td class="span1"><a href="{{ path('pages_page', {'id' : page.id}) }}" class="lien">{{ page.titre|raw }}</a></td>
+									{% set texte = page.contenu|slice(0, 500) %}
+									<td class="span3" style="max-width: 300px; overflow: hidden;">
+										{{ texte|raw }}...
+									</td>
+									<td class="span1" style="text-align: center;">
+										<a href="{{ path('pages_page', {'id' : page.id}) }}" class="lien">voir <i class="icon-eye-open"></i></a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="navigation span3 offset3">
+					{{ knp_pagination_render(pages) }}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

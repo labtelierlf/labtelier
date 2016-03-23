@@ -1,0 +1,110 @@
+{% extends "::base.html.twig" %}
+{% set totalHT = 0 %}
+{% set tva = 0 %}
+{% set totalTTC = 0 %}
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div id="entete" class="span12">
+				<h2>Votre panier <i class="icon-shopping-cart"></i></h2>
+				<div id="champ" class="span3">
+					{% include 'AccueilBundle:Modules:navigation.html.twig' %}
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						{% include 'UtilisateursBundle:Modules:utilisateurConnecte.html.twig' %}
+					{% else %}
+						{% include 'UtilisateursBundle:Modules:utilisateurDeconnecte.html.twig' %}
+					{% endif %}
+					{% if is_granted('ROLE_ADMIN') %}
+						{% include 'AccueilBundle:Modules:formulaires.html.twig' %}
+					{% endif %}
+				</div>
+				<div class="liens span7 paddingRight {% if produits|length != 0 %}paddingBottom{% endif %} bords">
+					{% for flashMessage in app.session.flashbag.get('success') %}
+						<div class="alert alert-success">{{ flashMessage }}</div>
+					{% endfor %}
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Référence</th>
+								<th>Quantité</th>
+								<th>Unité HT</th>
+								<th>Total HT</th>
+								<th>Total TTC</th>
+							</tr>
+						</thead>
+						<tbody>
+							<script>
+								function redirection() {
+									location.href="{{ path('produits_calendrier') }}";
+								}
+							</script>
+							{% if produits|length == 0 and reservations|length == 0 %}
+								<tr>
+									<td colspan="5">Aucun article dans votre panier</td>
+								</tr>
+							{% endif %}
+							{% for produit in produits %}
+								<tr>
+									<form action="{{ path('panier_ajouter', {'id' : produit.id}) }}" method="get">
+										<td>{{ produit.titre }}</td>
+										<td>
+											<select name="qte" class="span1" onchange="this.form.submit()">
+												{% for i in 1..10 %}
+													<option value="{{ i }}" {% if i == panier[produit.id] %}selected="selected"{% endif %}>{{ i }}</option>
+												{% endfor %}
+											</select>&nbsp;
+											<a href="{{ path('panier_supprimer', {'id' : produit.id}) }}"><i class="icon-trash"></i></a>
+										</td>
+										<td>{{ produit.tarif|round(2) }} €</td>
+										<td>{{ produit.tarif * panier[produit.id]|round(2) }} €</td>
+										<td>{{ (produit.tarif * panier[produit.id]) + ((produit.tarif * panier[produit.id]) * produit.tva.valeur / 100)|round(2) }} €</td>
+									</form>
+								</tr>
+								{% set totalHT = totalHT + (produit.tarif * panier[produit.id]) %}
+								{% set tva = tva + ((produit.tarif * panier[produit.id]) * produit.tva.valeur / 100) %}
+								{% set totalTTC = totalTTC + (produit.tarif * panier[produit.id]) + ((produit.tarif * panier[produit.id]) * produit.tva.valeur / 100) %}
+							{% endfor %}
+							{% if reservations|length > 0 %}
+								<td>Réservation Atelier Bois Poste n°1</td>
+								<td>
+									{% if reservations|length  == 1 %}
+										{{ reservations|length }} jour&nbsp;
+									{% else %}
+										{{ reservations|length }} jours&nbsp;
+									{% endif %}
+									<input type="button" value="Modifier" onclick="redirection()"/>
+								</td>
+								<td>45 €</td>
+								<td>{{ reservations|length * 45 }} €</td>
+								<td>{{ (reservations|length * 45) + ((reservations|length * 45) * 20) / 100 }} €</td>
+								{% set totalHT = totalHT + reservations|length * 45 %}
+								{% set tva = tva + ((reservations|length * 45) * 20) / 100 %}
+								{% set totalTTC = totalTTC + (reservations|length * 45) + ((reservations|length * 45) * 20) / 100 %}
+							{% endif %}
+						</tbody>
+					</table>
+					{% if produits|length != 0 or reservations|length != 0 %}
+						<dl class="dl-horizontal pull-right">
+							<dt>Total HT :</dt>
+							<dd>{{ totalHT|round(2) }} €</dd>
+							<dt>TVA :</dt>
+							<dd>{{ tva|round(2) }} €</dd>
+							<dt>Total:</dt>
+							<dd>{{ totalTTC|round(2) }} €</dd>
+						</dl>
+					{% endif %}
+					<div class="clearfix"></div>
+						<div class="wrapper" {% if produits|length == 0 and reservations|length == 0 %}style="margin-right: -20px"{% endif %}>
+							<div class="parent">
+							<a href="{{ path('produits_homepage') }}" class="bouton children">Continuer mes achats</a>
+							{% if produits|length != 0 or reservations|length != 0 %}
+								<a href="{{ path('produits_commande') }}" class="boutonMiroir children pull-right">Valider mon panier</a>
+							{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

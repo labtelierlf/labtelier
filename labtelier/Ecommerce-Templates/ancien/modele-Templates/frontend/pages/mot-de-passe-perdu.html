@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link rel="stylesheet" href="../css/bootstrap.css"/>
+	<link rel="stylesheet" href="../css/bootstrap-responsive.css"/>
+	<link rel="stylesheet" href="../css/style.css"/>
+	<link rel="stylesheet" href="font-awesome.css"/>	<title>Mot de passe perdu</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <h2>Mot de passe perdu <i class="icon-warning-sign"></i></h2>
+			<div class="span4 bords">
+				<h4>Vous avez perdu votre mot de passe ?</h4>
+				<em>
+					Compléter le formulaire, un email vous seras envoyé.<br/>
+					Il contiendra la procèdure à suivre pour récupérer<br/>
+					votre mot de passe.
+				</em>
+			</div>
+			<div class="liens span4 offset2 bords">
+				<h4>Signaler la perte de votre mot de passe</h4>
+				<form action="nouveau-mot-de-passe.php">
+					<label>Adresse email</label>
+					<input type="text" name="email" id="email" class="correction"/>
+					<br/>
+					<div class="wrapper">
+						<div class="parent">
+							<button class="bouton children">Envoyer</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+    </div>
+</div>
+<script src="../js/jquery-1.10.0.min.js"></script>
+<script src="../js/bootstrap.js"></script>
+</body>
+</html>

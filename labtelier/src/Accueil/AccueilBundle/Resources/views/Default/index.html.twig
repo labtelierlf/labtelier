@@ -1,0 +1,15 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+	<div id="entete">
+		<h1 style="margin-left:20px">Page d'accueil <i class="icon-home"></i></h1>
+		{% include 'AccueilBundle:Modules:menu.html.twig' %}
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			{% include 'UtilisateursBundle:Modules:utilisateurConnecte.html.twig' %}
+		{% else %}
+			{% include 'UtilisateursBundle:Modules:utilisateurDeconnecte.html.twig' %}
+		{% endif %}
+		{% if is_granted('ROLE_ADMIN') %}
+			{% include 'AccueilBundle:Modules:formulaires.html.twig' %}
+		{% endif %}
+	</div>
+{% endblock %}
